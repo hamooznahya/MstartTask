@@ -5,7 +5,7 @@ import com.example.mstarttask.data.datasource.RemoteDataSource
 import com.example.mstarttask.data.dto.DateResponse
 import com.example.mstarttask.domain.mapper.DateMapper
 import com.example.mstarttask.domain.model.DateModel
-import com.example.mstarttask.domain.repository.DateRepositories
+import com.example.mstarttask.domain.repository.DateRepository
 import com.example.mstarttask.utils.ResponseState
 import com.example.mstarttask.utils.mapToError
 import kotlinx.coroutines.Dispatchers
@@ -16,55 +16,42 @@ import kotlinx.coroutines.flow.map
 import javax.inject.Inject
 import kotlin.concurrent.thread
 
-class DateRepositoriesImpl @Inject constructor(
+class DateRepositoryImpl @Inject constructor(
     private val remoteDataSource: RemoteDataSource,
     private val offlineDataSource: OfflineDataSource,
     private val dateMapper: DateMapper
-) : DateRepositories {
+) : DateRepository {
 
     override fun getAllEvent(): Flow<List<DateModel>> {
+
         return offlineDataSource.getItems()
             .map {
                 it.map {
-                    var dateModel = DateModel(
-                        it.id,
-                        it.eventName,
-                        it.eventDescription,
-                        it.GregorianDate,
-                        it.HijriDate,
-                        it.serverDatetime
-                    )
-                    dateModel.id = it.id
-                    dateModel
+                    dateMapper.mapDateModelToEntity(it)
                 }
             }
             .flowOn(Dispatchers.IO)
     }
 
-    override fun saveEvent(item: DateModel) {
-        thread {
+    override suspend fun saveEvent(item: DateModel) {
+//        thread {
             offlineDataSource.addItem(dateMapper.mapEntityToDateModel(item))
-        }
+        //}
     }
 
-    override fun deleteEvent(date: DateModel) {
-        thread {
+    override suspend fun deleteEvent(date: DateModel) {
             offlineDataSource.deleteItem(dateMapper.mapEntityToDateModel(date))
-        }
+
     }
 
-    override fun deleteById(id: List<Int>) {
-        thread {
+    override suspend fun deleteById(id: List<Int>) {
             offlineDataSource.deleteById(id)
-        }
     }
 
-    override fun updateEvent(date: DateModel) {
-        thread {
+    override suspend fun updateEvent(date: DateModel) {
             offlineDataSource.updateItem(
                 dateMapper.mapEntityToDateModel(date)
             )
-        }
     }
 
     override fun convertDate(date: String): Flow<ResponseState<DateResponse>> {
