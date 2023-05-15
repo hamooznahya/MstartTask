@@ -1,0 +1,24 @@
+<resources>
+    <string name="app_name">MstartTask</string>
+
+    <string name="error">Error!</string>
+    <string name="title_button_ok">Ok</string>
+    <string name="title_no_network_connection">No network connection</string>
+    <string name="title_no_netwomsg_no_internet_connectionrk_connection">No network connection</string>
+    <string name="msg_no_internet_connection">No internet connection. Connect to the internet and try again.</string>
+    <string name="title_button_refresh">Refresh</string>
+
+    <string name="title_id_number_with_value">Id: %1$s</string>
+    <string name="event_name">Event Name: %1$s</string>
+    <string name="event_description">Event Description: %1$s</string>
+    <string name="hijri_Date">Hijri Date: %1$s</string>
+    <string name="gregorian_Date">Gregorian Date: %1$s</string>
+    <string name="server_Date">Server Date: %1$s</string>
+    <string name="choose_your_language_en" translatable="false">Choose your language</string>
+    <string name="choose_your_language_Ar" translatable="false">إختر اللغة المناسبة لك</string>
+    <string name="english" translatable="false">English</string>
+    <string name="arabic" translatable="false">العربية</string>
+    <string name="convert_date_gregorian_to_hijri">Convert Date Gregorian to Hijri</string>
+    <string name="date">Date</string>
+    <string name="pick_date">Pick Date</string>
+</resources>

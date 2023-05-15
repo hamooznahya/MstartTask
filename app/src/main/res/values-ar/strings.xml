@@ -1,0 +1,21 @@
+<resources>
+    <string name="app_name">تاسك</string>
+
+    <string name="error">خطأ!</string>
+    <string name="title_button_ok">موافق</string>
+    <string name="title_no_network_connection">لا يوجد شبكة</string>
+    <string name="title_no_netwomsg_no_internet_connectionrk_connection">لا يوجد شبكة</string>
+    <string name="msg_no_internet_connection">لا يوجد اتصال بالانترنت حاول من جديد </string>
+    <string name="title_button_refresh">تحديث</string>
+
+    <string name="title_id_number_with_value">رقم الإضافة:  %1$s</string>
+    <string name="event_name">اسم الحدث: %1$s</string>
+    <string name="event_description"> وصف الحدث: %1$s</string>
+    <string name="hijri_Date">  التاريخ الهجري: %1$s</string>
+    <string name="gregorian_Date">  التاريخ الميلادي: %1$s</string>
+    <string name="server_Date">   وقت السيرفر: %1$s</string>
+    <string name="convert_date_gregorian_to_hijri">تحويل التاريخ الميلادي إلى الهجري</string>
+    <string name="date">التاريخ</string>
+    <string name="pick_date">اختر التاريخ </string>
+
+</resources>
