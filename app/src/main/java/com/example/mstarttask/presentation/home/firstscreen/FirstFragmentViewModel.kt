@@ -5,7 +5,6 @@ import androidx.lifecycle.viewModelScope
 import com.example.mstarttask.data.dto.DateResponse
 import com.example.mstarttask.domain.model.DateModel
 import com.example.mstarttask.domain.repository.DateRepositories
-import com.example.mstarttask.domain.usecase.GetConvertDateUseCase
 import com.example.mstarttask.utils.ResponseState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableSharedFlow
@@ -17,7 +16,6 @@ import javax.inject.Inject
 @HiltViewModel
 class FirstFragmentViewModel
 @Inject constructor(
-    private val useCase: GetConvertDateUseCase,
     private val dateRepositories: DateRepositories
 ) : ViewModel() {
 
@@ -46,7 +44,7 @@ class FirstFragmentViewModel
 
     fun convertDate(date: String) {
         viewModelScope.launch {
-            useCase.execute(date).collectLatest {
+            dateRepositories.convertDate(date).collectLatest {
                 _result.emit(it)
             }
         }
