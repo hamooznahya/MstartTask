@@ -8,13 +8,10 @@ import com.example.mstarttask.data.datasource.RemoteDataSource
 import com.google.gson.FieldNamingPolicy
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
-import com.moczul.ok2curl.CurlInterceptor
-import com.moczul.ok2curl.logger.Logger
 import com.example.mstarttask.constants.Constants
 import com.example.mstarttask.data.database.AppDatabase
 import com.example.mstarttask.data.database.DateDao
 import com.example.mstarttask.data.datasource.OfflineDataSource
-import com.example.mstarttask.data.network.ResponseHandlerInterceptor
 import com.example.mstarttask.domain.datasource.OfflineDataSourceImpl
 import com.example.mstarttask.domain.datasource.RemoteDataSourceImpl
 import com.example.mstarttask.utils.appPreferencesStore
@@ -68,13 +65,8 @@ class AppModule {
             .readTimeout(TIMEOUT_SECONDS, TimeUnit.SECONDS)
             .connectTimeout(TIMEOUT_SECONDS, TimeUnit.SECONDS)
             .addNetworkInterceptor(interceptor)
-            .addInterceptor(ResponseHandlerInterceptor())
             .addInterceptor(interceptor)
-            .addInterceptor(CurlInterceptor(object : Logger {
-                override fun log(message: String) {
-                    Log.v("Curl", message)
-                }
-            }))
+
         val retrofit = Retrofit.Builder()
             .addConverterFactory(GsonConverterFactory.create(provideGson()))
             .baseUrl(Constants.BASE_URL)

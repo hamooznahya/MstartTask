@@ -4,9 +4,10 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.mstarttask.data.dto.DateResponse
 import com.example.mstarttask.domain.model.DateModel
-import com.example.mstarttask.domain.repository.DateRepositories
+import com.example.mstarttask.domain.repository.DateRepository
 import com.example.mstarttask.utils.ResponseState
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.asSharedFlow
 import kotlinx.coroutines.flow.collectLatest
@@ -16,7 +17,7 @@ import javax.inject.Inject
 @HiltViewModel
 class FirstFragmentViewModel
 @Inject constructor(
-    private val dateRepositories: DateRepositories
+    private val dateRepositories: DateRepository
 ) : ViewModel() {
 
     private val _result = MutableSharedFlow<ResponseState<DateResponse>>()
@@ -37,7 +38,7 @@ class FirstFragmentViewModel
         fun saveItem(
         date: DateModel,
     ) {
-        viewModelScope.launch {
+        viewModelScope.launch(Dispatchers.IO) {
             dateRepositories.saveEvent(date)
         }
     }

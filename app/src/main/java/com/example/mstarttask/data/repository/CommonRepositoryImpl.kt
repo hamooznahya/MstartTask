@@ -14,14 +14,13 @@ class CommonRepositoryImpl @Inject constructor(
 ) : CommonRepository {
 
 
-    override fun changeLanguage(newLanguage: String): Boolean {
-        runBlocking {
+    override fun changeLanguage(newLanguage: String): Flow<AppSettings> {
+        return flow {
             val appSettings = offlineDataSource.getAppLanguage().first()
             appSettings.language = newLanguage
             offlineDataSource.saveAppLanguage(appSettings)
+            emit(appSettings)
         }
-        return true
-
     }
 
     override fun getAppSettings(): Flow<AppSettings> {

@@ -26,15 +26,17 @@ class LanguageViewModel @Inject constructor(
     val languageState: LiveData<String>
         get() = _languageState
 
-    private val _changeLanguageState = MutableLiveData<Boolean>()
-    val changeLanguageState: LiveData<Boolean>
+    private val _changeLanguageState = MutableLiveData<AppSettings>()
+    val changeLanguageState: LiveData<AppSettings>
         get() = _changeLanguageState
 
 
     fun changeLanguage(newLanguage: String) {
         viewModelScope.launch {
-            repository.changeLanguage(newLanguage)
-                _changeLanguageState.value = true
+            repository.changeLanguage(newLanguage).collect{
+                _changeLanguageState.value = it
+
+            }
 
         }
     }

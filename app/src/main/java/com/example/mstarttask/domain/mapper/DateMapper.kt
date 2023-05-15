@@ -15,4 +15,14 @@ class DateMapper {
             serverDatetime = date.serverDatetime
         )
     }
+    fun mapDateModelToEntity(date: DateEntity): DateModel {
+        return DateModel(
+            id = date.id,
+            eventName = date.eventName,
+            eventDescription = date.eventDescription,
+            HijriDate = date.HijriDate,
+            GregorianDate = date.GregorianDate,
+            serverDatetime = date.serverDatetime
+        )
+    }
 }

@@ -3,10 +3,10 @@ package com.example.mstarttask.di
 import com.example.mstarttask.data.datasource.OfflineDataSource
 import com.example.mstarttask.data.datasource.RemoteDataSource
 import com.example.mstarttask.data.repository.CommonRepositoryImpl
-import com.example.mstarttask.data.repository.DateRepositoriesImpl
+import com.example.mstarttask.data.repository.DateRepositoryImpl
 import com.example.mstarttask.domain.mapper.DateMapper
 import com.example.mstarttask.domain.repository.CommonRepository
-import com.example.mstarttask.domain.repository.DateRepositories
+import com.example.mstarttask.domain.repository.DateRepository
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -24,8 +24,8 @@ class RepositoriesModule {
     fun DateRepositories(
         remoteDataSource: RemoteDataSource,
      offlineDataSource: OfflineDataSource
-    ): DateRepositories {
-        return DateRepositoriesImpl(remoteDataSource,offlineDataSource,DateMapper())
+    ): DateRepository {
+        return DateRepositoryImpl(remoteDataSource,offlineDataSource,DateMapper())
     }
 
     @Provides
